@@ -1,0 +1,132 @@
+<html>  
+
+<head>  
+    <title>main</title> 
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="stl.css">
+
+     
+</head>  
+<body> 
+    <div class="p-3 mb-2 bg-dark text-white">
+    
+   
+       <div class="p-3 mb-2 bg-primary text-white">
+        <h1>Admin Pannel</h1>  
+        
+        
+              
+                <label> EmployeeID </label>  
+                <input type = "text" id ="f1" name  = "user" />  
+            
+            <br> 
+            <button id = "getdatabtn" onclick="retriveData()"  type="submit" (click)="submitForm($event)" mat-raised-button class="btn btn-success" >Search</button>
+        </div>
+        <div class="p-3 mb-2 bg-success text-white">
+            <div class="container mt-3">  
+            <table id="display" class="table table-dark text-white">
+                <thead>
+                
+                <th> glucose</th>
+                <th>BloodPressure</th>
+                <th>OxygenSaturation</th>
+                <th>HeartBeat</th>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+                
+            </table>
+              
+           
+     
+          
+        
+    </div>
+</div>
+</div>
+  
+        
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+
+        <script>
+        
+        var firebaseConfig = {
+            apiKey: "AIzaSyALN-fwrDj7R8tJSR-mCEYlI21LBSlK8TE",
+            authDomain: "newproj-b6cee.firebaseapp.com",
+            databaseURL: "https://newproj-b6cee-default-rtdb.firebaseio.com",
+            projectId: "newproj-b6cee",
+            storageBucket: "newproj-b6cee.appspot.com",
+            messagingSenderId: "1086026728086",
+            appId: "1:1086026728086:web:4cda972dc1aba8e7e3b8b7",
+            measurementId: "G-CGN1LXQQ0Y"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        </script> 
+        <script>
+         function retriveData(){
+
+         
+         
+    
+            var db=firebase.firestore();
+            const list_div=document.querySelector("#list_div");
+
+            var val=document.getElementById("f1").value;
+            if(!val){
+                alert("Enter Employee ID"); 
+        
+            }
+        
+            
+            db.collection(val).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    
+                    var glucose=doc.data().glucose;
+                    var bp=doc.data().bp;
+                    var oxygen=doc.data().oxygen;
+                    var hb=doc.data().heartbeat;
+                    AddItemsToTable(glucose,bp,oxygen,hb);
+                   
+                
+                
+                });
+                window.onload=retriveData;
+                function AddItemsToTable(glucose,bp,oxygen,hb){
+
+               
+                    var tbody=document.getElementById('tbody');
+                    var trow=document.createElement('tr');
+                    var td1=document.createElement('td');
+                    var td2=document.createElement('td');
+                    var td3=document.createElement('td');
+                    var td4=document.createElement('td');
+                    td1.innerHTML=glucose;
+                    td2.innerHTML=bp;
+                    td3.innerHTML=oxygen;
+                    td4.innerHTML=hb;
+                    trow.appendChild(td1);
+                    trow.appendChild(td2);
+                    trow.appendChild(td3);
+                    trow.appendChild(td4);
+                    tbody.appendChild(trow);
+            }
+
+            });
+        }
+
+</script>
+
+        
+           
+
+    </body>
+
+    </html>

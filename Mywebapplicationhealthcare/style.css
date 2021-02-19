@@ -1,0 +1,34 @@
+body{   
+    background: #3498db; 
+    text-align:center;
+    padding: 10px;
+     
+}  
+#frm{  
+    border: solid gray 1px;    
+    border-radius: 2px;  
+    background-color: white;
+    width: 300px;
+    height: 340px;
+    margin-left: 590px;
+    margin-top: 250px;
+    border-radius:4px
+
+}  
+#btn{  
+    color: #fff;  
+    background: #337ab7;  
+    padding: 7px;  
+     
+}  
+#frm > form label{
+    margin-top: 100px;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+#frm > form input{
+    height: 35px;
+    text-align: center;
+}
